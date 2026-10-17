@@ -1,27 +1,26 @@
 class Zelport < Formula
-  desc "Local HTTP gateway for named localhost services"
+  desc "Local HTTP reverse proxy for named localhost services"
   homepage "https://github.com/zelport/zelport"
-  version "0.1.0-preview.5"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/zelport/zelport/releases/download/v0.1.0-preview.5/zelport_0.1.0-preview.5_darwin_arm64.tar.gz"
-      sha256 "1a94b2bd00e51117e84e4ff7a6cb4cd91a6a4c4cf9779e9527389167bf67d8e1"
+      url "https://github.com/zelport/zelport/releases/download/v0.10.0/zelport_0.10.0_darwin_arm64.tar.gz"
+      sha256 "424aba73bbdbc82145eec539b4d891335f6a7d1fbf679a8b0dd456ba575b3612"
     end
     on_intel do
-      url "https://github.com/zelport/zelport/releases/download/v0.1.0-preview.5/zelport_0.1.0-preview.5_darwin_amd64.tar.gz"
-      sha256 "28d0905c3a05f36f63488d4b42fb85cf9e702e095f20fa44512bf594e0ee5060"
+      url "https://github.com/zelport/zelport/releases/download/v0.10.0/zelport_0.10.0_darwin_amd64.tar.gz"
+      sha256 "1943731c592b43826df2616f65f3d15e7e0d8278c85e2ce32e04861475ffccee"
     end
   end
   on_linux do
     on_arm do
-      url "https://github.com/zelport/zelport/releases/download/v0.1.0-preview.5/zelport_0.1.0-preview.5_linux_arm64.tar.gz"
-      sha256 "16a6a5cf78a04c53cf4e4b85e63de98a322b7e1d7569928ef88df9d93c0fcc91"
+      url "https://github.com/zelport/zelport/releases/download/v0.10.0/zelport_0.10.0_linux_arm64.tar.gz"
+      sha256 "4905ca85d604dd102a071a138cb24f8b40ebdbe78b89dd6810a5e4bc77a70ed1"
     end
     on_intel do
-      url "https://github.com/zelport/zelport/releases/download/v0.1.0-preview.5/zelport_0.1.0-preview.5_linux_amd64.tar.gz"
-      sha256 "e66b39feb828ef77a8503b26221a0d5953548934cc2d0446c24d28ab26bd15ce"
+      url "https://github.com/zelport/zelport/releases/download/v0.10.0/zelport_0.10.0_linux_amd64.tar.gz"
+      sha256 "e6ec8ad37429d967afe94f2eb6ab1ff227a9ed2c7ddacc6c13c322fd1039121e"
     end
   end
 
@@ -56,6 +55,6 @@ class Zelport < Formula
 
   test do
     assert_match "zelport #{version}", shell_output("#{bin}/zelport --version")
-    assert_match "HTTP gateway", shell_output("#{bin}/zelport --help 2>&1")
+    assert_match "HTTP reverse proxy", shell_output("#{bin}/zelport --help 2>&1")
   end
 end
