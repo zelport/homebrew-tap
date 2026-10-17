@@ -7,21 +7,21 @@ class Zelport < Formula
   on_macos do
     on_arm do
       url "https://github.com/zelport/zelport/releases/download/v0.10.0/zelport_0.10.0_darwin_arm64.tar.gz"
-      sha256 "424aba73bbdbc82145eec539b4d891335f6a7d1fbf679a8b0dd456ba575b3612"
+      sha256 "58fef0eb94c32734ee9105b187d2abeb3c955c10946b60913f0c9d426a937a57"
     end
     on_intel do
       url "https://github.com/zelport/zelport/releases/download/v0.10.0/zelport_0.10.0_darwin_amd64.tar.gz"
-      sha256 "1943731c592b43826df2616f65f3d15e7e0d8278c85e2ce32e04861475ffccee"
+      sha256 "f18f2815f3a67dfcad2fac9bcea6e295b48c9996c40b6cbadd0f7d95d669a614"
     end
   end
   on_linux do
     on_arm do
       url "https://github.com/zelport/zelport/releases/download/v0.10.0/zelport_0.10.0_linux_arm64.tar.gz"
-      sha256 "4905ca85d604dd102a071a138cb24f8b40ebdbe78b89dd6810a5e4bc77a70ed1"
+      sha256 "a170434606969b48ff5adec8f3a40293f81214c2b776fc0ffc8152483ab9f72c"
     end
     on_intel do
       url "https://github.com/zelport/zelport/releases/download/v0.10.0/zelport_0.10.0_linux_amd64.tar.gz"
-      sha256 "e6ec8ad37429d967afe94f2eb6ab1ff227a9ed2c7ddacc6c13c322fd1039121e"
+      sha256 "7d6217cd104e9f3d0109a5baddf8ed0d0797caa4d8df0e23be46eba1ce585738"
     end
   end
 
