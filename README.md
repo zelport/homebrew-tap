@@ -17,6 +17,10 @@ Do not run two instances with the same port or configuration. A Homebrew service
 does not inherit the complete interactive shell environment; configure required
 backend tools and SSH agent access explicitly.
 
+Docker, Podman, `sbx`, and system SSH are supported external tools for their
+respective Zelport App service sources. They are not bundled by this formula and
+are not required for sources that do not use them.
+
 ## Update the formula
 
 Generate and verify all four App archives before editing this repository:
