@@ -1,0 +1,54 @@
+name: Update Zelport formula
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Stable Zelport version without the v prefix; defaults to latest
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-zelport-formula
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Test the updater
+        run: python3 -m unittest discover -s scripts -p 'test_*.py'
+      - name: Verify release and update formula
+        id: update
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          arguments=()
+          if [[ -n "$VERSION" ]]; then
+            arguments+=(--version "$VERSION")
+          fi
+          python3 scripts/update-formula.py "${arguments[@]}"
+      - name: Create update pull request
+        if: steps.update.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7
+        with:
+          token: ${{ github.token }}
+          add-paths: Formula/zelport.rb
+          branch: automation/zelport-${{ steps.update.outputs.version }}
+          delete-branch: true
+          commit-message: 'build(formula): publish zelport ${{ steps.update.outputs.version }}'
+          title: 'build(formula): publish zelport ${{ steps.update.outputs.version }}'
+          body: |
+            Automated update from the verified public Zelport App release.
+
+            Every referenced archive was downloaded and checked against the
+            release's published `SHA256SUMS` before this pull request was opened.

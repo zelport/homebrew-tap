@@ -21,19 +21,27 @@ Docker, Podman, `sbx`, and system SSH are supported external tools for their
 respective Zelport App service sources. They are not bundled by this formula and
 are not required for sources that do not use them.
 
-## Update the formula
+## Release updates
 
-Generate and verify all four App archives before editing this repository:
+The `Update Zelport formula` workflow checks for a new stable Zelport App
+release every hour. It downloads and verifies all four archives against the
+published `SHA256SUMS`, generates the formula from the tagged App template, and
+opens a pull request. The workflow can also be run manually for a specific
+stable version.
+
+The repository must allow GitHub Actions to create pull requests. Keep workflow
+permissions restricted to this repository; no cross-repository token is needed.
+
+For a manual fallback, run the same verified updater locally:
 
 ```sh
-make release VERSION=0.10.0
+python3 scripts/update-formula.py --version 0.10.1
 ```
 
-Copy `bin/homebrew/0.10.0/Formula/zelport.rb` into `Formula/`, verify that each
-formula checksum matches the exact immutable archive, then run Homebrew style,
-audit, install and test checks. Never replace bytes at an existing release URL.
-The initial formula has no `revision`; packaging-only corrections increment a
-numeric Homebrew `revision` without changing the App version.
+Then run Homebrew style, audit, install and test checks. Never replace bytes at
+an existing release URL. The initial formula has no `revision`; packaging-only
+corrections increment a numeric Homebrew `revision` without changing the App
+version.
 
 ## Local formula test
 
