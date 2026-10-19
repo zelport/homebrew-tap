@@ -25,7 +25,8 @@ The scheduled `Update Zelport formula` workflow checks for a new stable Zelport
 App release. It downloads and verifies the supported release archives against
 the published `SHA256SUMS`, generates the formula from the tagged App template,
 and opens a pull request. The workflow can also be run manually for a specific
-stable version. The [workflow file](.github/workflows/update-formula.yml) is
+canonical release such as `v0.10.2`. The
+[workflow file](.github/workflows/update-formula.yml) is
 authoritative for the schedule and release platform matrix.
 
 Repository writes use a short-lived, current-repository token from the
@@ -36,12 +37,14 @@ rotation are documented in the
 For a manual fallback, run the same verified updater locally:
 
 ```sh
-: "${APP_VERSION:?set APP_VERSION to the numeric stable App release}"
+: "${APP_VERSION:?set APP_VERSION to the canonical stable App release}"
 python3 scripts/update-formula.py --version "$APP_VERSION"
 ```
 
 Then run Homebrew style, audit, install and test checks. Never replace bytes at
 an existing release URL; use a Homebrew `revision` for packaging-only fixes.
+The formula derives its prefix-free `version` field and artifact filenames from
+the canonical release identifier.
 
 ## Local formula test
 

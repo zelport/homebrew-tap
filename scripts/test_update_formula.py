@@ -45,6 +45,13 @@ class UpdateFormulaTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     UPDATE.version_tuple(version)
 
+    def test_normalizes_canonical_release_identifier(self):
+        self.assertEqual(UPDATE.release_version("v1.2.3"), "1.2.3")
+        for version in ("1.2.3", "v1.2", "v1.2.3-rc.1", "v01.2.3"):
+            with self.subTest(version=version):
+                with self.assertRaises(ValueError):
+                    UPDATE.release_version(version)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -50,6 +50,14 @@ def version_tuple(version):
     return tuple(int(part) for part in version.split("."))
 
 
+def release_version(value):
+    if not value.startswith("v"):
+        raise ValueError(f"release version must start with v: {value}")
+    version = value[1:]
+    version_tuple(version)
+    return version
+
+
 def render_formula(template, version, checksums):
     downloads = []
     current_os = None
@@ -113,12 +121,11 @@ def write_output(name, value):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--version", help="stable version without the v prefix")
+    parser.add_argument("--version", help="canonical stable release, for example v0.10.2")
     args = parser.parse_args()
-    if args.version:
-        version_tuple(args.version)
+    requested = release_version(args.version) if args.version else None
 
-    version = release(args.version)
+    version = release(requested)
     current = re.search(
         r'^  version "([^"]+)"$', FORMULA.read_text(encoding="utf-8"), re.MULTILINE
     )
@@ -152,8 +159,8 @@ def main():
         temporary.replace(FORMULA)
 
     write_output("changed", str(changed).lower())
-    write_output("version", version)
-    print(f"Formula is {'updated to' if changed else 'already at'} Zelport {version}")
+    write_output("version", f"v{version}")
+    print(f"Formula is {'updated to' if changed else 'already at'} Zelport v{version}")
 
 
 if __name__ == "__main__":

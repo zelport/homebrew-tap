@@ -24,7 +24,7 @@ Examples:
 - `feat(homebrew): support user services`
 - `fix(relay): preserve client identities on reconnect`
 - `docs: clarify installation instructions`
-- `build(formula): publish zelport 0.10.0`
+- `build(formula): publish zelport v0.10.0`
 
 Do not rewrite existing shared history merely to change commit message format.
 
@@ -47,3 +47,11 @@ publication, including generated source bundles.
 
 Preserve the existing repository-local Git author and committer configuration
 unless the user explicitly requests a change.
+
+## Release notation
+
+Use the canonical `vMAJOR.MINOR.PATCH` Zelport App release identifier in
+documentation, workflow dispatches, Make invocations, automation branches,
+pull-request titles and reports. The formula's `version` field and release asset
+filenames are derived numeric payloads because those formats omit the prefix.
+The tap has no independent release version or tags.

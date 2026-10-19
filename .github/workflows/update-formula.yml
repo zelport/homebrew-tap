@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: Stable Zelport version without the v prefix; defaults to latest
+        description: Canonical stable Zelport release (vX.Y.Z); defaults to latest
         required: false
         type: string
 
