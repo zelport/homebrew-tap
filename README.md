@@ -23,11 +23,12 @@ are not required for sources that do not use them.
 
 ## Release updates
 
-The `Update Zelport formula` workflow checks for a new stable Zelport App
-release every hour. It downloads and verifies all four archives against the
-published `SHA256SUMS`, generates the formula from the tagged App template, and
-opens a pull request. The workflow can also be run manually for a specific
-stable version.
+The scheduled `Update Zelport formula` workflow checks for a new stable Zelport
+App release. It downloads and verifies the supported release archives against
+the published `SHA256SUMS`, generates the formula from the tagged App template,
+and opens a pull request. The workflow can also be run manually for a specific
+stable version. The [workflow file](.github/workflows/update-formula.yml) is
+authoritative for the schedule and release platform matrix.
 
 The repository must allow GitHub Actions to create pull requests. Keep workflow
 permissions restricted to this repository; no cross-repository token is needed.
@@ -35,7 +36,8 @@ permissions restricted to this repository; no cross-repository token is needed.
 For a manual fallback, run the same verified updater locally:
 
 ```sh
-python3 scripts/update-formula.py --version 0.10.1
+: "${APP_VERSION:?set APP_VERSION to the numeric stable App release}"
+python3 scripts/update-formula.py --version "$APP_VERSION"
 ```
 
 Then run Homebrew style, audit, install and test checks. Never replace bytes at
