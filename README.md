@@ -9,17 +9,15 @@ brew install zelport/tap/zelport
 brew services start zelport
 ```
 
-Installation does not start Zelport. Run `zelport` in a terminal or start the
-service as your regular user, without `sudo`. Homebrew uses launchd on macOS and
-systemd on Linux. The dashboard is available at <http://localhost:8080>.
+Installation does not start Zelport. Run it directly or start the service as
+your regular user, without `sudo`. The dashboard is at <http://localhost:8080>.
 
 Do not run two instances with the same port or configuration. A Homebrew service
 does not inherit the complete interactive shell environment; configure required
 backend tools and SSH agent access explicitly.
 
-Docker, Podman, `sbx`, and system SSH are supported external tools for their
-respective Zelport App service sources. They are not bundled by this formula and
-are not required for sources that do not use them.
+Docker, Podman, `sbx`, and system SSH are optional external tools for their
+respective service sources and are not bundled.
 
 ## Release updates
 
@@ -30,8 +28,10 @@ and opens a pull request. The workflow can also be run manually for a specific
 stable version. The [workflow file](.github/workflows/update-formula.yml) is
 authoritative for the schedule and release platform matrix.
 
-The repository must allow GitHub Actions to create pull requests. Keep workflow
-permissions restricted to this repository; no cross-repository token is needed.
+Repository writes use a short-lived, current-repository token from the
+organization-owned `zelport-automation` GitHub App. Credential provisioning and
+rotation are documented in the
+[automation registry](https://github.com/zelport/workspace/blob/main/AUTOMATIONS.md).
 
 For a manual fallback, run the same verified updater locally:
 
@@ -41,9 +41,7 @@ python3 scripts/update-formula.py --version "$APP_VERSION"
 ```
 
 Then run Homebrew style, audit, install and test checks. Never replace bytes at
-an existing release URL. The initial formula has no `revision`; packaging-only
-corrections increment a numeric Homebrew `revision` without changing the App
-version.
+an existing release URL; use a Homebrew `revision` for packaging-only fixes.
 
 ## Local formula test
 
@@ -60,7 +58,6 @@ brew install zelport
 brew test zelport
 ```
 
-The helper verifies every local archive checksum before modifying only the
-installed tap copy. Never commit that local override. Stop any running service
-before `brew uninstall zelport`; uninstalling the formula does not remove user
-configuration.
+The helper verifies the archives and modifies only the installed tap copy. Never
+commit that override. Stop the service before uninstalling; user configuration
+is preserved.
