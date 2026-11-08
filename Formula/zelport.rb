@@ -2,26 +2,26 @@ class Zelport < Formula
   desc "Local HTTP reverse proxy for named localhost services"
   homepage "https://github.com/zelport/zelport"
   license "MIT"
-  version "0.10.2"
+  version "0.11.0"
 
   on_macos do
     on_arm do
-      url "https://github.com/zelport/zelport/releases/download/v0.10.2/zelport_0.10.2_darwin_arm64.tar.gz"
-      sha256 "d678995bf55c4884e9f858c3e14697ee49209fcf3b399f1eeecb387a3314d4cc"
+      url "https://github.com/zelport/zelport/releases/download/v0.11.0/zelport_0.11.0_darwin_arm64.tar.gz"
+      sha256 "3befd14abbc1be3ecdfe3e49801a7173cb88998ea48aff187db1625efd868b0d"
     end
     on_intel do
-      url "https://github.com/zelport/zelport/releases/download/v0.10.2/zelport_0.10.2_darwin_amd64.tar.gz"
-      sha256 "282c6563f1f086028f5aba379faafe47055fc7e3f2ad46128df95e2fc9209cea"
+      url "https://github.com/zelport/zelport/releases/download/v0.11.0/zelport_0.11.0_darwin_amd64.tar.gz"
+      sha256 "b7a8dba4d562f30460294cda71b79a2b997d0d95d375822d4c45000bdd61962c"
     end
   end
   on_linux do
     on_arm do
-      url "https://github.com/zelport/zelport/releases/download/v0.10.2/zelport_0.10.2_linux_arm64.tar.gz"
-      sha256 "c55219310f6d762438f29f34f76998e16fd47458c6148696152a24703bda3215"
+      url "https://github.com/zelport/zelport/releases/download/v0.11.0/zelport_0.11.0_linux_arm64.tar.gz"
+      sha256 "b21e21ab13c145cb2cd0e80398abf7564cc9836272095aab76e4c29b70e71b82"
     end
     on_intel do
-      url "https://github.com/zelport/zelport/releases/download/v0.10.2/zelport_0.10.2_linux_amd64.tar.gz"
-      sha256 "d4318e8b315bba019335e589d73e31346e4060ac00a7f4181a143049d10b10c9"
+      url "https://github.com/zelport/zelport/releases/download/v0.11.0/zelport_0.11.0_linux_amd64.tar.gz"
+      sha256 "7889b58d824288f90783b09a12b0f0e99d5d7f11ec6dc800bded8f323f7389f5"
     end
   end
 
