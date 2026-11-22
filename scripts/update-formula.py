@@ -26,7 +26,10 @@ CHECKSUM = re.compile(r"([0-9a-f]{64})  ([A-Za-z0-9._-]+)")
 
 
 def download(url):
-    request = Request(url, headers={"User-Agent": "zelport-homebrew-updater"})
+    headers = {"User-Agent": "zelport-homebrew-updater"}
+    if token := os.environ.get("GITHUB_TOKEN"):
+        headers["Authorization"] = f"Bearer {token}"
+    request = Request(url, headers=headers)
     with urlopen(request, timeout=60) as response:
         return response.read()
 

@@ -1,6 +1,7 @@
 import importlib.util
 from pathlib import Path
 import unittest
+from unittest.mock import Mock, patch
 
 
 SCRIPT = Path(__file__).with_name("update-formula.py")
@@ -51,6 +52,19 @@ class UpdateFormulaTest(unittest.TestCase):
             with self.subTest(version=version):
                 with self.assertRaises(ValueError):
                     UPDATE.release_version(version)
+
+    def test_download_authenticates_with_github_token(self):
+        response = Mock()
+        response.read.return_value = b"release data"
+        with (
+            patch.dict(UPDATE.os.environ, {"GITHUB_TOKEN": "app-token"}),
+            patch.object(UPDATE, "urlopen") as urlopen,
+        ):
+            urlopen.return_value.__enter__.return_value = response
+            self.assertEqual(UPDATE.download("https://api.github.com/example"), b"release data")
+
+        request = urlopen.call_args.args[0]
+        self.assertEqual(request.get_header("Authorization"), "Bearer app-token")
 
 
 if __name__ == "__main__":

@@ -39,6 +39,7 @@ jobs:
         id: update
         env:
           VERSION: ${{ inputs.version }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           set -euo pipefail
           arguments=()
