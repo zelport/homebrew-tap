@@ -1,5 +1,7 @@
 # Zelport Homebrew tap
 
+[![Update Zelport formula](https://github.com/zelport/homebrew-tap/actions/workflows/update-formula.yml/badge.svg)](https://github.com/zelport/homebrew-tap/actions/workflows/update-formula.yml)
+
 Rolling Homebrew formula for Zelport App on macOS and Linux, ARM64 and x86-64.
 The tap follows Zelport App releases and has no independent release version or
 tags.
